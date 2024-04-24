@@ -1,0 +1,87 @@
+shiragelbstein,elishadiskind
+212926737,208782656
+
+Q1:
+image package:
+
+class ImageAsSubImages: 
+The ImageAsSubImages class pedds and divides an input image into smaller sub-images 
+based on given image and resolution in the constructor. It adjusts the image dimensions to
+the nearest power of 2, adds white padding around the edges, and then generates a 2D array of sub-images.
+The class provides methods to retrieve information about the processed image, such as
+dimensions and sub-image list. 
+its one relation is Composition of subImage, list of subImage variebles.
+
+class SubImage: 
+The SubImage class represents a segment of an image, defined by its starting position,
+dimensions, and brightness. It calculates its brightness based on the given formula. 
+This class is designed to facilitate the analysis of specific portions within the image it holds.
+We chose to impliment this class becouse It encapsulates brightness calculation and pixel retrieval,
+promoting code modularity. moreover it keeps minimalistic API and clear variable naming, it complements the 
+higher-level ImageAsSubImages class, contributing to a structured image processing framework.
+ImageAsSubImages Compositions it, and it Compositions image.
+
+image_char_matching package :
+
+class SubImgCharMatcher: The SubImgCharMatcher responsible of matching characters to brightness 
+values. The class supports linear normalization of brightness values, facilitates dynamic addition and 
+removal of characters from the charset, and provides a method to retrieve the closest character based
+on a given brightness value. 
+Shell and AsciiArtAlgorithm Compositions it for calculating chars for the images.
+
+ascii_art package :
+
+class AsciiArtAlgorithm: The AsciiArtAlgorithm class responsible of converting an image to ASCII art.
+Its constructor gets the ImageAsSubImages class, which represents the image to be "asciied" divided
+into sub-images with brightnesses, and the SubImgCharMatcher class, responsible for calculating characters
+for sub-image brightness values.
+AsciiArtAlgorithm Compositions ImageAsSubImages SubImgCharMatcher for running the Algorithem when
+the method run is being called.
+
+class InvalidCommandException : The InvalidCommandException class is an exception designed to be thrown when
+an invalid command is encountered during the processing of ASCII art in the Shell's functoins and catches
+by the Shell's run method. This class extends the standard Exception class, allowing for the creation of 
+custom exceptions tailored specifically for a varius of specific error messeges for the same type of command.
+Shell construct it several times.
+
+class Shell:  The Shell class runs interactive command-line interface for managing and generating
+ASCII art. Users can input commands to manipulate the ASCII art creation process, including modifying the
+character set (adding od removing chars) ,adjusting resolution, specifying image files, selecting output
+methods (console or HTML), and generating the ASCII art itself.
+the shell is Compositions: 
+*SubImgCharMatcher that Provides functionality for adding, removing, and retrieving
+characters ar run time. due to its uniqe structure holding it improves run time.
+*Image Represents the current image to be converted to ASCII art.
+*AsciiOutput Represents the current defining methods for ASCII art output.
+*ImageAsSubImages Represents the original image divided into sub-images for processing.
+Calculated based on the current image and resolution.
+holding ImageAsSubImages improve runtime efficiency by is calculating only when needed,
+reducing unnecessary processing overhead.
+
+Q2:
+The SubImgCharMatcher class utilizes two main data structures in Java:
+
+1) ArrayList<Character> charSet:
+
+It Stores the set of characters  given in the SubImgCharMatcher's constructor. 
+converting the charset given in a regular format of list (char[]). It may couse O(n) runtime
+in intialisation but when dynamicly adding and removing elements O(1) (if has space left).
+
+2) TreeMap<Double, Character> charMatcherMap:
+
+Maps brightness values (after being normalised) to characters and maintains sorting.
+Efficient for searching, inserting, and deleting elements.
+O(logn) time complexity for operations like floorKey, ceilingKey, and put (add).
+It may be initialised in O(nlogn) but once it is inisialised getting the most close char 
+with given brigtness is in O(logn), also adding and removing (assuming its not the max and min values).
+
+Q3:
+
+
+Q4:
+we added a method getCharSet() which returns the current 
+charset for iterating it in the Shell when "chars" command is called.
+
+Q5:
+we did not changed the given code.
+
