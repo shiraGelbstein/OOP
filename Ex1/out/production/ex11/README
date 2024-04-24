@@ -1,0 +1,29 @@
+shiragelbstein
+212926737
+
+1. Whatever Player :
+     The strategy is compliantly random, choosing randomly out of the board
+     coordinates and marking.
+
+  Clever Player :
+    The strategy was for the 55% of the times (randomly choosing 0-100 number and checking its value)
+    using the whatever player and than for the rest acting like the genius.
+
+  Genius Player :
+    the strategy is marking in the most unfilled row in the board in the most left column.
+    that way the genius will (almost) always fill a line and than the clever will fill another
+    line and so on until they finish size of the board rounds and starting over that the genius
+    fills its lines and the clever the rest after him.
+    or if clever starts it wont always play as the genius and will get random acting which satisfies
+    the behavior supplied in ex1 instructions.
+
+2.  The advantage of a shared interface for the players is being able of programming
+    A game between players without needing to know exactly which one of the players we are using,
+    only at run time! that way we are voiding cod duplication and having a readable cod.
+    moreover if we want to add other players we will only need the class of the new player
+    to have the same interface as the other players without changing the game's Api.
+    these advantages are  exactly what we called the polymorphism
+
+
+
+
